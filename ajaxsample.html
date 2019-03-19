@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>西暦を平成〇〇年に変換します</title>
+ 
+<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+     $('#send').click(function(){     //変換ボタンをクリックで発生
+    
+          $.ajax({ //ajaxによる非同期通信発生
+               type: "POST", //POST送信でデータを受け渡す
+               url: "send.php", //send.phpにデータを送る
+               data: {seireki:$('#seireki').val()}, //id:seirekiに入力された文字列         
+               success: function(hoge) //接続が成功
+                    {
+                         alert(hoge); //send.phpからの帰り値をポップアップで表示
+                    },         
+               error: function(XMLHttpRequest,textStatus,errorThrown) //接続が失敗
+                    {
+                         alert('エラーです！'); //エラーを表示
+                    }
+          });
+          return false;    
+     });
+});
+</script>
+</head>
+ 
+<body>
+<h2>西暦を平成○○年に変換します（2016年現在）</h2> <!--題名-->
+ 
+  <input text id="seireki" name="seireki" style="width:50px"> 年 <br /><br /> <!--ここに西暦を入力-->
+  <input type="submit"  id="send" value="平成に変換する！" > <!--変換ボタン-->
+ 
+</body>
+</html>
